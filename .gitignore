@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+notes
+.env
+.venv/*
+.DS_Store
+.idea/*
