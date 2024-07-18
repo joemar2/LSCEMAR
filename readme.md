@@ -4,6 +4,7 @@ Locally Significant Certificate (LSC) <ins>E</ins>xpiration <ins>M</ins>onitorin
 
 This script should be used with a scheduler to run periodically (daily for example).  Phones may restart after an LSC update.
 
+It is recommended to also setup certificate monitoring on CUCM by following [Certificate Monitoring Task Flow](https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/cucm/security/12_5_1/cucm_b_security-guide-1251/cucm_b_security-guide-1251_chapter_011111.html#task_86DB33CC77B85F10FCE6DB83881D8938) as a backup to be notified if certificates are not renewed for some reason.
 ## Installation
 
 #### Rename **.env_example** to **.env** and edit the values.

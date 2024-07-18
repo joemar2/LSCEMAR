@@ -89,12 +89,12 @@ def run():
     soup = BeautifulSoup(response_xml, 'lxml')
     #print(soup.prettify())
 
-    d = {}
+    device = {}
     for entry in soup.find_all('row'):
         name = entry.find('name').text
         lsc_expire = int(entry.find('lscvaliduntil').text)
         pkid = entry.find('pkid').text
-        d[name] = {'lsc_expire':lsc_expire,'pkid':pkid}
+        device[name] = {'lsc_expire':lsc_expire,'pkid':pkid}
 
     now = int(time.time())
     renew_before_seconds = int(os.getenv("LSC_RENEW_BEFORE_DAYS")) * 24*60*60
@@ -103,11 +103,11 @@ def run():
     nothing_found = True
     print(f'Checking for LSCs expiring on or before {end_date}')
     phone_to_update_lsc = {}
-    for key,value in d.items():
-        if (d[key]['lsc_expire'] - renew_before_seconds) <= now:
+    for key,value in device.items():
+        if (device[key]['lsc_expire'] - renew_before_seconds) <= now:
             #renew cert
-            print(f"{key} ({d[key]['pkid']}) expires on {datetime.datetime.fromtimestamp(d[key]['lsc_expire']).strftime('%m-%d-%Y')}")
-            phone_to_update_lsc[key] = d[key]['pkid']
+            print(f"{key} ({device[key]['pkid']}) expires on {datetime.datetime.fromtimestamp(device[key]['lsc_expire']).strftime('%m-%d-%Y')}")
+            phone_to_update_lsc[key] = device[key]['pkid']
             nothing_found = False
 
     if nothing_found:
